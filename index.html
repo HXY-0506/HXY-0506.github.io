@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致小玄 · 情人节快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffd6e0 30%, #ffc2d1 60%, #ff8fa3 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 爱心粒子背景 */
+        .heart {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #ff8fa3;
+            transform: rotate(45deg);
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            width: 25px;
+            height: 25px;
+            background: #ff8fa3;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before { left: -12px; top: 0; }
+        .heart::after { left: 0; top: -12px; }
+
+        @keyframes float {
+            0% { transform: rotate(45deg) translateY(0) scale(0.8); opacity: 0.7; }
+            50% { transform: rotate(45deg) translateY(-60px) scale(1); opacity: 1; }
+            100% { transform: rotate(45deg) translateY(0) scale(0.8); opacity: 0.7; }
+        }
+
+        /* 主内容盒子 */
+        .card {
+            position: relative;
+            z-index: 99;
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(255, 143, 163, 0.4);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            animation: cardIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.5s;
+        }
+
+        @keyframes cardIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 标题：小玄 —— 超级醒目 */
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #d16a8f;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: textFade 1s forwards 1.2s;
+            letter-spacing: 6px;
+        }
+
+        /* 副标题 */
+        .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: textFade 1s forwards 1.6s;
+        }
+
+        /* 浪漫文案 */
+        .content {
+            font-size: 17px;
+            color: #444;
+            line-height: 1.8;
+            opacity: 0;
+            animation: textFade 1s forwards 2s;
+            margin-bottom: 20px;
+        }
+
+        /* 情人节惊喜文案 */
+        .surprise {
+            font-size: 22px;
+            color: #ff4d7a;
+            font-weight: bold;
+            opacity: 0;
+            animation: textFade 1s forwards 2.6s;
+        }
+
+        @keyframes textFade {
+            to { opacity: 1; }
+        }
+
+        /* 点击小提示 */
+        .tip {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #999;
+            opacity: 0;
+            animation: tipFlash 2s infinite alternate 3.2s;
+        }
+
+        @keyframes tipFlash {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 动态爱心背景 -->
+    <div class="heart" style="left:10%;top:20%;animation-delay:0s"></div>
+    <div class="heart" style="left:85%;top:15%;animation-delay:0.5s"></div>
+    <div class="heart" style="left:25%;top:80%;animation-delay:1s"></div>
+    <div class="heart" style="left:70%;top:70%;animation-delay:1.5s"></div>
+    <div class="heart" style="left:50%;top:10%;animation-delay:0.3s"></div>
+
+    <!-- 主惊喜卡片 -->
+    <div class="card">
+        <div class="title">小 玄</div>
+        <div class="subtitle">情人节 · 为你而写</div>
+        <div class="content">
+            不想用俗套的情话<br>
+            只想认认真真做一份专属惊喜<br>
+            这个页面，只属于你
+        </div>
+        <div class="surprise">
+            遇见你，就是最浪漫的意外
+        </div>
+        <div class="tip">点开的瞬间，心意已经全部送达 ✨</div>
+    </div>
+
+    <script>
+        // 鼠标点击生成爱心，互动惊喜
+        document.addEventListener('click', function(e) {
+            let heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = e.clientX - 12 + 'px';
+            heart.style.top = e.clientY - 12 + 'px';
+            heart.style.animation = 'float 2s ease-out forwards';
+            heart.style.zIndex = '999';
+            document.body.appendChild(heart);
+            
+            // 2秒后移除
+            setTimeout(() => heart.remove(), 2000);
+        });
+    </script>
+</body>
+</html>
